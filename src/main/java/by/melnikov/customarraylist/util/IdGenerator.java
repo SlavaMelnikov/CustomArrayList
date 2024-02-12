@@ -1,9 +1,12 @@
 package by.melnikov.customarraylist.util;
 
+/**
+    Утилитный класс, генерирующий уникальные id для созданных объектов.
+ */
 public class IdGenerator {
-    private static long currentId;
+    private static int currentId;
 
-    public static long generateId() {
+    public static int generateId() {
         return ++currentId;
     }
 }

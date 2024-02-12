@@ -1,5 +1,10 @@
 package by.melnikov.customarraylist.exception;
 
+/**
+ * Класс, являющийся проверяемым кастомным исключением. Создан для повышения контроля
+ * работы списка в исключительных ситуациях и повышения надежности в целом.
+ *
+ */
 public class CustomException extends Exception {
     public CustomException() {
     }

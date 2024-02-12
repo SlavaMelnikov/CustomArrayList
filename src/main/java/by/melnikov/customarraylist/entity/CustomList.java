@@ -2,23 +2,90 @@ package by.melnikov.customarraylist.entity;
 
 import by.melnikov.customarraylist.exception.CustomException;
 
+/**
+* CustomList<T> - это интерфейс, который предоставляет базовый функционал для работы
+ * с пользовательским списком элементов типа T. Он определяет методы для добавления, получения,
+ * удаления, очистки и изменения элементов в списке. Имеет поведение, схожее с {@link java.util.ArrayList}.
+ * Для возможности перебора коллекции в цикле foreach, наследуется от интерфейса {@link java.util.Iterator}.
+ * Методы, работающие с индексом, выбрасывают проверяемое исключение {@link CustomException} для повышения
+ * надежности работы коллекции.
+ *
+ * @param <T> тип элементов, хранящихся в коллекции.
+ * @author  Slava Melnikov
+ *
+ */
 public interface CustomList<T> extends Iterable<T> {
+
+    /**
+     * Добавляет элемент element в конец списка.
+     * @param element  элемент, который будет добавлен в конец списка
+     */
     void add(T element);
+
+    /**
+     * Добавляет элемент element на указанную позицию index в списке. Все элементы, находящиеся правее от
+     * позици вставки, будут сдвинуты вправо на одну позицию.
+     * @param index  позиция в списке, куда будет вставлен element
+     * @param element  объект, который будет добавлен в список
+     * @throws CustomException если передан индекс, выходящий за текущие границы списка.
+     */
     void add(int index, T element) throws CustomException;
-    void addFirst(T element) throws CustomException;
-    void addLast(T element);
+
+    /**
+     * Возвращает элемент, находящийся на позиции index в списке.
+     * @param index позиция в списке, по которой будет получен объект
+     * @return объект, находящийся на позиции index
+     * @throws CustomException если передан индекс, выходящий за текущие границы списка.
+     */
     T get(int index) throws CustomException;
-    T getFirst() throws CustomException;
-    T getLast() throws CustomException;
+
+    /**
+     * Проверяет, содержится ли элемент element в списке. Возвращает индекс первого вхождения элемента.
+     * @param element объект, наличие в списке которого мы проверяем
+     * @return возвращает индекс первого вхождения элемента или -1, если элемент не найден.
+     */
     int contains(T element);
+
+    /**
+     * Удаляет элемент на позиции index из списка и возвращает его.
+     * @param index индекс элемента, который будет удален
+     * @return объект, который был удален из списка.
+     * @throws CustomException если передан индекс, выходящий за текущие границы списка.
+     */
     T remove(int index) throws CustomException;
+
+    /**
+     * Удаляет первое вхождение объекта element из списка.
+     * @param element объект, который будет удален из списка
+     * @return true если объект был удален, false если такой объект отсутствует в списке
+     * @throws CustomException если передан индекс, выходящий за текущие границы списка.
+     */
     boolean remove(T element) throws CustomException;
-    T removeFirst() throws CustomException;
-    T removeLast() throws CustomException;
+
+    /**
+     * Очищает список, удаляя все элементы.
+     */
     void clear();
+
+    /**
+     * Возвращает текущее количество элементов в списке.
+     * @return текущее количество элементов в списке.
+     */
     int size();
+
+    /**
+     * Проверяет, пуст ли список. Возвращает true, если список не содержит элементов, и false в противном случае.
+     * @return true, если список не содержит элементов, и false в противном случае.
+     */
     boolean isEmpty();
+
+    /**
+     * Заменяет элемент на позиции index новым элементом element и возвращает старый элемент.
+     * Если индекс недопустим, выбрасывается исключение CustomException.
+     * @param index  позиция в списке, в которую будет вставлен объект element
+     * @param element  объект, который будет вставлен в список на позицию index
+     * @return объект, который бы заменен
+     * @throws CustomException если передан индекс, выходящий за текущие границы списка.
+     */
     T set(int index, T element) throws CustomException;
-    CustomList<T> subList(int from, int to) throws CustomException;
-    void sort();
 }

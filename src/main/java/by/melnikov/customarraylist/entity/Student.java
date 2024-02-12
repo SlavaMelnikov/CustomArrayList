@@ -4,18 +4,23 @@ import by.melnikov.customarraylist.util.IdGenerator;
 
 import java.util.StringJoiner;
 
-public class SomeCustomObject {
-    private long id;
+/**
+ * Класс сущность, созданный для проверки работы {@link CustomList} с случайным объектом.
+ * Реализует интерфейс {@link Comparable} для проверки правильности списка при реализации
+ * кастомной сортировки.
+ */
+public class Student implements Comparable<Student> {
+    private int id;
     private String name;
     private int age;
 
-    public SomeCustomObject(String name, int age) {
+    public Student(String name, int age) {
         this.id = IdGenerator.generateId();
         this.name = name;
         this.age = age;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -36,11 +41,16 @@ public class SomeCustomObject {
     }
 
     @Override
+    public int compareTo(Student o) {
+        return this.id - o.id;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SomeCustomObject that = (SomeCustomObject) o;
+        Student that = (Student) o;
 
         return id == that.id;
     }
@@ -52,7 +62,7 @@ public class SomeCustomObject {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", SomeCustomObject.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", Student.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("name='" + name + "'")
                 .add("age=" + age)
